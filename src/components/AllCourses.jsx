@@ -6,6 +6,7 @@ import SingleCourseItem from "./SingleCourseItem"
 
 /* dependencies */
 import React from 'react';
+import { useWidthValue } from '../hooks/useWidthValue';
 
 const AllCourses = () => {
 
@@ -37,7 +38,7 @@ const AllCourses = () => {
             console.log(data);
             let sortedData = data.courses.sort((a, b) => new Date(b.launchDate) - new Date(a.launchDate))
             setAllCoursesData([...sortedData])
-            console.log(data.sta)
+            console.log(data)
         });
     }, [])
 
@@ -54,16 +55,41 @@ const AllCourses = () => {
     }
 
     return (
-        <div className="div">
-            <div className="div-test">
-                here must be a lot of courses
-                {dataForShow.map(element => <SingleCourseItem key={element.id} data={element} />)}             
+        <section className="all-courses">
+            <div className="all-courses__container">
+                <div className="all-courses__wrapper">
+                    <div className="all-courses__pagination">
+                        <div className="all-courses__pagination-title">
+                            {useWidthValue() > 450 ? `All courses available on ${pageNumbers.length} pages:` : "Pages:"}
+                        </div>
+                        <div className="all-courses__pagination-wrapper">
+                            {pageNumbers.map(element => <div
+                                className={element === page ?
+                                    "all-courses__pagination-item all-courses__pagination-item--active" :
+                                    "all-courses__pagination-item"}
+                                key={element}
+                                onClick={() => setPage(element)}>{element > 9 ? `${element}` : '0' + `${element}`}</div>)}
+                        </div>
+                    </div>
+                    <div className="all-courses__courses">
+                        {dataForShow.map((element, index) => <SingleCourseItem key={element.id} data={element} index={index}/>)}
+                    </div>
+                    <div className="all-courses__pagination">
+                        <div className="all-courses__pagination-title">
+                            {useWidthValue() > 450 ? `All courses available on ${pageNumbers.length} pages:` : "Pages:"}
+                        </div>
+                        <div className="all-courses__pagination-wrapper">
+                            {pageNumbers.map(element => <div
+                                className={element === page ?
+                                    "all-courses__pagination-item all-courses__pagination-item--active" :
+                                    "all-courses__pagination-item"}
+                                key={element}
+                                onClick={() => setPage(element)}>{element > 9 ? `${element}` : '0' + `${element}`}</div>)}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="pagination">
-                {pageNumbers.map(element => <div key={element}
-                    onClick={() => setPage(element)}>{element}</div>)}
-            </div>
-        </div>
+        </section>
     )
 }
 

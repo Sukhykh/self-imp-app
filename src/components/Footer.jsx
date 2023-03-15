@@ -18,7 +18,7 @@ const Footer = () => {
         <footer className="footer">
             <div className="footer__container">
                 <div className="footer__wrapper">
-                    <div className="footer__divider"></div>
+                    <div className="footer__content footer__content--task">For Genesis Front-End School 2.0</div>
                     <div className="footer__content">© Created by <span className="footer__content footer__content--colored">Kostiantyn Sukhykh</span></div>
                     <div className="footer__content">Kyiv, {year === 2023 ? year : '2023-' + year}</div>
                 </div>

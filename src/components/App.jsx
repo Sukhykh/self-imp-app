@@ -9,29 +9,32 @@ import SingleCourse from "./SingleCourse"
 
 /* dependencies */
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 
 const App = () => {
 	
 	return (
-		<div>
+		<>
 			<Header />
-			Hello
-			<Link to='/'>AllCourses</Link >
-			<Link to='/course'>SingleCourse</Link>
-			<Routes>
-				<Route
-					path='/'
-					element={<AllCourses />}
-				></Route>
-				<Route
-					path='/:title'
-					element={<SingleCourse />}
-				></Route>
-			</Routes>
+			<main className="main">
+				<div className="main__container">
+					<div className="main__wrapper">				
+						<Routes>
+							<Route
+								path='/'
+								element={<AllCourses />}
+							></Route>
+							<Route
+								path='/:title'
+								element={<SingleCourse />}
+							></Route>
+						</Routes>
+					</div>
+				</div>
+			</main>
 			<Footer />
-		</div>
+		</>
 	)
 };
 

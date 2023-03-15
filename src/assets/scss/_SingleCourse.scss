@@ -1,1 +1,161 @@
 @import "./general/general.scss";
+
+.single-course {
+
+    &__container {
+        @include container
+    }
+
+    &__title-bar {
+        padding: 1rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5rem;
+        width: 100%;
+
+        border-top: 0.2rem solid $pink;
+        border-bottom: 0.2rem solid $pink;
+
+        &--bottom {
+            justify-content: flex-end;
+        }
+    }
+
+    &__title {
+        @include font-normal($fw700);
+        font-size: 2rem;
+        color: $pink;
+        text-shadow:
+            1px 0 $violet,
+            1px 1px $violet,
+            0 1px $violet,
+            -1px 1px $violet,
+            -1px 0 $violet,
+            -1px -1px $violet,
+            0 -1px $violet,
+            1px -1px $violet;
+
+        @media screen and (max-width: 570px) {
+            font-size: 1.5rem;
+        }
+    }
+
+    &__btn {
+        cursor: pointer;
+        text-decoration: none;
+        min-width: fit-content;
+        padding: 0.5rem 1rem;
+        border: 0.1rem solid $violet;
+        border-radius: 1rem;
+        @include font-normal($fw400);
+        font-size: 1.5rem;
+        color: $violet;
+
+        transition: all 0.3s linear;
+
+        &:hover {
+            border: 0.1rem solid $pink;
+            color: $pink;
+        }
+
+        &:active {
+            opacity: 0.5;
+        }
+
+        @media screen and (max-width: 570px) {
+            font-size: 1rem;
+        }
+    }
+
+    &__content {
+        margin: 3rem 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        gap: 3rem;
+    }
+
+    &__background {
+        position: relative;
+        width: 100%;
+    }
+
+    &__img-wrapper {
+        max-width: 100%;
+        width: 100%;
+
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: $white;
+            opacity: 0.9;
+        }
+    }
+
+    &__img {
+        width: 100%;
+        height: auto;
+    }
+
+    &__data {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__description {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+
+        max-width: dinamicValues(1000px);
+        width: 100%;
+        margin-inline: auto;
+
+        @media screen and (min-width: 1400px) {
+            max-width: 1000px;
+        }
+    }
+
+    &__description-title {
+        @include font-normal($fw400);
+        font-size: 1.5rem;
+        color: $violet;
+        text-transform: uppercase;
+
+        @media screen and (max-width: 800px) {
+            font-size: 1.2rem;
+        }
+
+        @media screen and (max-width: 570px) {
+            font-size: 1rem;
+        }
+    }
+
+    &__description-text {
+        @include font-italic($fw700);
+        font-size: 3rem;
+        color: $gray;
+        text-align: center;
+
+        @media screen and (max-width: 800px) {
+            font-size: 2rem;
+        }
+
+        @media screen and (max-width: 570px) {
+            font-size: 1.3rem;
+        }
+    }
+}

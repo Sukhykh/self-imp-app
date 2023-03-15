@@ -1,1 +1,33 @@
 @import "./general/general.scss";
+
+.footer {
+    background-color: $white;
+
+    &__container {
+        @include container;
+    }
+
+    &__wrapper {
+        padding: 2rem 0;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.2rem;
+    }
+
+    &__content {
+        @include font-normal($fw400);
+        font-size: 1rem;
+        color: $violet;
+
+        &--task {
+            font-size: 1.2rem;
+        }
+
+        &--colored {
+            font-weight: $fw700;
+            text-transform: uppercase;
+            color: $pink;
+        }
+    }
+}

@@ -1,0 +1,31 @@
+/* function */
+@function dinamicValues($n) {
+    @return calc($n / 1400px) * 100 * 1vw;
+}
+
+/* containers */
+
+@mixin container {
+    max-width: dinamicValues(1200px);
+    width: 100%;
+    margin-inline: auto;
+
+    @media screen and (min-width: 1400px) {
+        max-width: 1200px;
+    }
+}
+
+/* fonts */
+@mixin font-normal($fw) {
+    font-family: $font;
+    font-weight: $fw;
+    line-height: 120%;
+    font-style: normal;
+}
+
+@mixin font-italic($fw) {
+    font-family: $font;
+    font-weight: $fw;
+    line-height: 120%;
+    font-style: italic;
+}

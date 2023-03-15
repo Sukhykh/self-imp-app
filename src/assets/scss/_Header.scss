@@ -1,1 +1,46 @@
 @import "./general/general.scss";
+
+.header {
+    background-color: $white;
+
+    &__container {
+        @include container;
+    }
+
+    &__wrapper {
+        padding: 2rem 0;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    &__title-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    &__title {
+        @include font-normal($fw700);
+        font-size: 3rem;
+        color: $pink;
+        text-transform: uppercase;
+        text-shadow:
+            1px 0 $violet,
+            1px 1px $violet,
+            0 1px $violet,
+            -1px 1px $violet,
+            -1px 0 $violet,
+            -1px -1px $violet,
+            0 -1px $violet,
+            1px -1px $violet;
+    }
+
+    &__sub-title {
+        @include font-italic($fw400);
+        font-size: 2rem;
+        color: $violet;
+    }
+
+
+}

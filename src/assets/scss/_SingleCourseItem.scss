@@ -1,1 +1,149 @@
 @import "./general/general.scss";
+
+.course {
+    &__wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        border-bottom: 0.2rem solid $violet;
+        overflow: hidden;
+        gap: 2rem;
+
+        &--border-right {
+            border-right: 0.2rem solid $violet;
+            border-bottom-right-radius: 2rem;
+            box-shadow: 0.3rem 0.3rem 0.3rem 0.3rem $gray;
+        }
+
+        &--border-left {
+            border-left: 0.2rem solid $violet;
+            border-bottom-left-radius: 2rem;
+            box-shadow: -0.3rem 0.3rem 0.3rem 0.3rem $gray;
+        }
+
+        @media screen and (max-width: 900px) {
+            flex-direction: column;
+            gap: unset;
+        }
+    }
+
+    &__img-wrapper {
+        max-width: 50%;
+        width: 100%;
+
+        @media screen and (max-width: 900px) {
+            max-width: 100%;
+        }
+    }
+
+    &__text-wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        max-width: 50%;
+        width: 100%;
+
+        @media screen and (max-width: 900px) {
+            max-width: unset;
+            width: unset;
+        }
+    }
+
+    &__img {
+        width: 100%;
+        height: auto;
+    }
+
+    &__title {
+        text-align: center;
+        @include font-normal($fw700);
+        font-size: 2rem;
+        color: $pink;
+        text-shadow:
+            1px 0 $violet,
+            1px 1px $violet,
+            0 1px $violet,
+            -1px 1px $violet,
+            -1px 0 $violet,
+            -1px -1px $violet,
+            0 -1px $violet,
+            1px -1px $violet;
+
+        @media screen and (max-width: 570px) {
+            font-size: 1.5rem;
+        }
+    }
+
+    &__descr-wrapper {
+        margin-top: 1rem;
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__descr {
+        max-width: 50%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__skills-bar {
+        max-width: 50%;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__string-title {
+        @include font-normal($fw400);
+        font-size: 1.5rem;
+        color: $violet;
+        margin-bottom: 0.5rem;
+
+        @media screen and (max-width: 570px) {
+            font-size: 1rem;
+        }
+    }
+
+    &__skills {
+        @include font-italic($fw400);
+        font-size: 1rem;
+    }
+
+    &__info {
+        font-weight: $fw700;
+        word-wrap: none;
+    }
+
+    &__btn {
+        text-transform: uppercase;
+        text-decoration: none;
+        text-align: end;
+        @include font-normal($fw700);
+        font-size: 1.5rem;
+        color: $pink;
+        margin-top: 0.5rem;
+
+        transition: all 0.3s linear;
+
+        &:hover,
+        &:focus {
+            color: $violet;
+        }
+
+        &:active {
+            opacity: 0.5;
+        }
+
+        @media screen and (max-width: 900px) {
+            margin-top: 2rem;
+        }
+
+        @media screen and (max-width: 400px) {
+            font-size: 1rem;
+        }
+    }
+}

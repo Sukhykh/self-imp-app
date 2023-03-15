@@ -27,7 +27,8 @@ const SingleCourse = () => {
     const getCourseData = async (url = '') => {
         const response = await fetch(url, {
             headers: {
-                Authorization: `Bearer ${token}`,
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
             },
         })
         return await response.json();

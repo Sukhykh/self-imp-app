@@ -26,6 +26,7 @@ const SingleCourse = () => {
 
     const getCourseData = async (url = '') => {
         const response = await fetch(url, {
+            mode: 'no-cors',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',

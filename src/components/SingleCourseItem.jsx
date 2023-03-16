@@ -22,12 +22,16 @@ const SingleCourseItem = (props) => {
             <div className={index === 0 ?
                 "course__wrapper course__wrapper--border-right" :
                 "course__wrapper course__wrapper--border-left"}>
-                {item.meta.courseVideoPreview && <video className="course__video" autoPlay preload="auto" loop muted controls width="640" height="360" >
-                    <source src={item.meta.courseVideoPreview.link} type="application/x-mpegURL" />
-                    Sorry, your browser doesn't support embedded videos.
-                </video>}
+               
                 {index === 0 && <div className="course__img-wrapper">
                     <img className="course__img" src={item.previewImageLink + '/cover.webp'} alt="course.img" />
+                    <div className="course__video-wrapper">
+                        {item.meta.courseVideoPreview && <video className="course__video" autoPlay preload="auto" loop muted controls>
+                            <source src={item.meta.courseVideoPreview.link} type="application/x-mpegURL" />
+                            Sorry, your browser doesn't support embedded videos.
+                        </video>}
+                        {!item.meta.courseVideoPreview && <div className="course__video-error">video unavailable</div>}
+                    </div>  
                 </div>}
 
                 {useWidthValue() > 900 && <div className="course__text-wrapper">
@@ -54,6 +58,13 @@ const SingleCourseItem = (props) => {
                 
                 {index !== 0 && <div className="course__img-wrapper">
                     <img className="course__img" src={item.previewImageLink + '/cover.webp'} alt="course.img" />
+                    <div className="course__video-wrapper">
+                        {item.meta.courseVideoPreview && <video className="course__video" autoPlay preload="auto" loop muted controls>
+                            <source src={item.meta.courseVideoPreview.link} type="application/x-mpegURL" />
+                            Sorry, your browser doesn't support embedded videos.
+                        </video>}
+                        {!item.meta.courseVideoPreview && <div className="course__video-error">Vvideo unavailable</div>}
+                    </div> 
                 </div>}
 
                 {useWidthValue() <= 900 && <div className="course__text-wrapper">

@@ -16,7 +16,7 @@ const SingleCourse = () => {
     const [lessonsData, setLessonsData] = React.useState([])
     const [skillsData, setSkillsData] = React.useState([])
     
-    // const host = "https://api.wisey.app";
+    const host = "https://api.wisey.app";
     const version = 'api/v1'
 
     const header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
@@ -32,8 +32,8 @@ const SingleCourse = () => {
     const date = new Date(courseData.launchDate);
     const timestamp = new Date().getTime();
 
-    // const URL = `${host}/${version}/core/preview-courses/${getLocalStorage()}`
-    const URL = `/${version}/core/preview-courses/${getLocalStorage()}?_=${timestamp}`
+    const URL = `${host}/${version}/core/preview-courses/${getLocalStorage()}`
+    // const URL = `https://crossorigin.me/${host}/${version}/core/preview-courses/${getLocalStorage()}?_=${timestamp}`
    
     React.useEffect(() => {
         getCourseData(URL, token)

@@ -18,7 +18,8 @@ const AllCourses = () => {
     // const host = "https://api.wisey.app";
     const version = 'api/v1'
     // const URL = `${host}/${version}/core/preview-courses`
-    const URL = `/${version}/core/preview-courses`
+    const timestamp = new Date().getTime();
+    const URL = `/${version}/core/preview-courses?_=${timestamp}`
 
     const header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
     const body =

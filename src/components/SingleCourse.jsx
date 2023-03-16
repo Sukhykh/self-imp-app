@@ -30,9 +30,10 @@ const SingleCourse = () => {
     }
 
     const date = new Date(courseData.launchDate);
+    const timestamp = new Date().getTime();
 
     // const URL = `${host}/${version}/core/preview-courses/${getLocalStorage()}`
-    const URL = `/${version}/core/preview-courses/${getLocalStorage()}`
+    const URL = `/${version}/core/preview-courses/${getLocalStorage()}?_=${timestamp}`
    
     React.useEffect(() => {
         getCourseData(URL, token)

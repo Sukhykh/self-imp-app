@@ -16,7 +16,7 @@ const SingleCourse = () => {
     const [lessonsData, setLessonsData] = React.useState([])
     const [skillsData, setSkillsData] = React.useState([])
     
-    const host = "https://api.wisey.app";
+    // const host = "https://api.wisey.app";
     const version = 'api/v1'
 
     const header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
@@ -31,32 +31,9 @@ const SingleCourse = () => {
 
     const date = new Date(courseData.launchDate);
 
-    const URL = `${host}/${version}/core/preview-courses/${getLocalStorage()}`
-
-    // const getCourseData = async (url = '') => {
-    //     const response = await fetch(url, {
-    //         'headers': {
-    //             'Authorization': `Bearer ${token}`,
-    //             'Content-Type': 'application/json',
-    //             'Access-Control-Allow-Origin': '*'
-    //         },
-    //     })
-    //     return await response.json();
-    // };
-
-    // React.useEffect(() => {
-    //     
-    //     getCourseData(URL).then((data) => {
-    //         console.log(data);
-    //         setCourseData(data);
-    //         setLessonsData(data.lessons)
-    //         if (data.meta.skills) {
-    //             setSkillsData(data.meta.skills)
-    //         }
-    //     });
-    // }, [])
-
-    
+    // const URL = `${host}/${version}/core/preview-courses/${getLocalStorage()}`
+    const URL = `/${version}/core/preview-courses/${getLocalStorage()}`
+   
     React.useEffect(() => {
         getCourseData(URL, token)
     }, [])

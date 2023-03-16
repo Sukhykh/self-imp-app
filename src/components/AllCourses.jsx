@@ -15,35 +15,16 @@ const AllCourses = () => {
     const [page, setPage] = React.useState(1)
 
     /* fetching */
-    const host = "https://api.wisey.app";
+    // const host = "https://api.wisey.app";
     const version = 'api/v1'
-    const URL = `${host}/${version}/core/preview-courses`
+    // const URL = `${host}/${version}/core/preview-courses`
+    const URL = `/${version}/core/preview-courses`
 
     const header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
     const body =
         'eyJzdWIiOiJkOTRlNjg4NS1kM2U5LTQwY2EtYTVjYy01MDRkNjZlZDVlN2QiLCJwbGF0Zm9ybSI6InN1YnNjcmlwdGlvbnMiLCJpYXQiOjE2Nzg3MDQ3NjIsImV4cCI6MTY3OTYwNDc2Mn0';
     const signature = 'Qw3LF39CDp27ZxoGzt5rikJM_OTx0eNaoyFFLxxrXUM';
     const token = [header, body, signature].join('.');
- 
-    // const getAllCourses = async (url = '') => {
-    //     const response = await fetch(url, {
-    //         "headers": {
-    //             'Authorization': `Bearer ${token}`,
-    //             'Content-Type': 'application/json',
-    //             'Access-Control-Allow-Origin': '*'
-    //         },
-    //     })
-    //     return await response.json();
-    // };
-
-    // React.useEffect(() => {
-    //     getAllCourses(URL).then((data) => {
-    //         console.log(data);
-    //         let sortedData = data.courses.sort((a, b) => new Date(b.launchDate) - new Date(a.launchDate))
-    //         setAllCoursesData([...sortedData])
-    //         console.log(data)
-    //     });
-    // }, [])
 
     React.useEffect(() => {
         getAllCourses(URL, token)

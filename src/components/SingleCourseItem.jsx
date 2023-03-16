@@ -22,9 +22,10 @@ const SingleCourseItem = (props) => {
             <div className={index === 0 ?
                 "course__wrapper course__wrapper--border-right" :
                 "course__wrapper course__wrapper--border-left"}>
-                {/* {item.meta.courseVideoPreview && <video className="course__video" preload="auto" loop muted controls width="640" height="360">
-                     <source src={item.meta.courseVideoPreview.link} type='application/x-mpegURL' />
-                </video>} */}
+                {item.meta.courseVideoPreview && <video className="course__video" autoPlay preload="auto" loop muted controls width="640" height="360" >
+                    <source src={item.meta.courseVideoPreview.link} type="application/x-mpegURL" />
+                    Sorry, your browser doesn't support embedded videos.
+                </video>}
                 {index === 0 && <div className="course__img-wrapper">
                     <img className="course__img" src={item.previewImageLink + '/cover.webp'} alt="course.img" />
                 </div>}

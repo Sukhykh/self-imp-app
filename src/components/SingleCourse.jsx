@@ -15,6 +15,7 @@ const SingleCourse = () => {
     const [courseData, setCourseData] = React.useState([])
     const [lessonsData, setLessonsData] = React.useState([])
     const [skillsData, setSkillsData] = React.useState([])
+    const [accordion, setAccordion] = React.useState(null)
     
     const host = "https://api.wisey.app";
     const version = 'api/v1'
@@ -30,14 +31,11 @@ const SingleCourse = () => {
     }
 
     const date = new Date(courseData.launchDate);
-    const timestamp = new Date().getTime();
-
     const URL = `${host}/${version}/core/preview-courses/${getLocalStorage()}`
-    // const URL = `https://crossorigin.me/${host}/${version}/core/preview-courses/${getLocalStorage()}?_=${timestamp}`
    
     React.useEffect(() => {
         getCourseData(URL, token)
-    }, [])
+    }, [URL, token])
 
     const getCourseData = async (urlValue, tokenValue) => {
         try {
@@ -53,7 +51,8 @@ const SingleCourse = () => {
             const data = await response.data;
             console.log(data);
             setCourseData(data);
-            setLessonsData(data.lessons)
+            let lessonsArr = data.lessons.sort((a, b) => a.order - b.order)
+            setLessonsData([...lessonsArr])
             if (data.meta.skills) {
                 setSkillsData(data.meta.skills)
             }
@@ -62,6 +61,8 @@ const SingleCourse = () => {
             console.error(error);
         }
     }
+
+    const poster = courseData.previewImageLink + '/cover.webp'
     
     return (
         <section className="single-course">
@@ -76,7 +77,7 @@ const SingleCourse = () => {
                     <div className="single-course__content">
                         <div className="single-course__background">
                             <div className="single-course__img-wrapper">
-                                <img className="single-course__img" src={courseData.previewImageLink + '/cover.webp'} alt="course.img" />
+                                <img className="single-course__img" src={poster} alt="course.img" />
                             </div>
                             <div className="single-course__description">
                                 <div className="single-course__description-title">description:</div>
@@ -84,27 +85,46 @@ const SingleCourse = () => {
                             </div>
                         </div>
                         <div className="single-course__data">
-                           
                             <div className="single-course__info">
-                                <div className="course__string-title">Available from: <span className="course__info">
-                                    {`${date.toLocaleDateString('en-US', { month: 'long' })}` + " " + `${date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`}` + ', ' + `${date.getFullYear()}`}</span></div>
-                                <div className="text">launchDate: {courseData.launchDate}</div>
-                                <div className="text">{courseData.containsLockedLessons ? "contains Locked Lessons" : "NO contains Locked Lessons"}</div>
-
-                                <div className="text">rating: {courseData.rating}</div>
-                                <div className="text">status: {courseData.status}</div>
-                                {skillsData && <div className="text">skills: {skillsData.map((element, index) => <div key={index}>{element}</div>)}</div>}
+                                <div className="single-course__info-bar">
+                                    <div className="single-course__info-header">Brief information</div>
+                                    <div className="single-course__info-title">
+                                        Rating:
+                                        <span className="single-course__info-descr">{courseData.rating}/5</span>
+                                    </div>
+                                    <div className="single-course__info-title">
+                                        Available from:
+                                        <span className="single-course__info-descr">
+                                            {`${date.toLocaleDateString('en-US', { month: 'long' })}` + " " + `${date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`}` + ', ' + `${date.getFullYear()}`}</span>
+                                    </div>
+                                    <div className="single-course__info-title">
+                                        Status:
+                                        <span className="single-course__info-descr">{courseData.status}</span>
+                                    </div>
+                                    <div className="single-course__info-header">Skills:</div>
+                                    {skillsData && skillsData.map((element, index) =>
+                                        <div className="single-course__info-descr" key={index}>{index + 1}. {element}</div>)}
+                                    {skillsData.length === 0 && <div className="single-course__info-descr single-course__info-descr--single">The list of skills is not defined!</div>}
+                                </div>
                             </div>
+                            <div className="single-course__lessons">
+                                <div className="single-course__info-header">Lessons:</div>
+                                <div className="single-course__info-descr single-course__info-descr--single">
+                                    {courseData.containsLockedLessons ?
+                                        "This course contains locked lessons" :
+                                        "This course does not contain locked lessons"}</div>
+                                <div className="single-course__lessons-bar">
+                                    {lessonsData.map((element, index) => <Lesson key={index}
+                                                                                 data={element}
+                                                                                 index={index}
+                                                                                 active={{ accordion, setAccordion }}
+                                                                                 poster={poster} />)}
+                                </div>
+                                
 
-                            <div className="lessons">lessons: </div>
-                            {lessonsData.map((element, index) => <Lesson key={index} data={element} />)}
+                            </div>
                         </div>
-                        
-                        
-                    
-                       
                     </div>
-
                     <div className="single-course__title-bar single-course__title-bar--bottom">
                         <Link to='/' className="single-course__btn">
                             {useWidthValue() > 450 ? 'Back to list' : 'Back'}

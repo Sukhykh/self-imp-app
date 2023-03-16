@@ -9,8 +9,15 @@ import { Link } from 'react-router-dom';
 import { useWidthValue } from '../hooks/useWidthValue';
 
 const SingleCourseItem = (props) => {
+    const [onHover, setOnHover] = React.useState(false);
+
+    const handleHover = () => {
+        setOnHover(!onHover)
+    } 
+
     const item = props.data;
     const index = props.index % 2;
+    const poster = item.previewImageLink + '/cover.webp'
 
     const setLocalStorage = () => {
         localStorage.removeItem('id');
@@ -23,15 +30,16 @@ const SingleCourseItem = (props) => {
                 "course__wrapper course__wrapper--border-right" :
                 "course__wrapper course__wrapper--border-left"}>
                
-                {index === 0 && <div className="course__img-wrapper">
-                    <img className="course__img" src={item.previewImageLink + '/cover.webp'} alt="course.img" />
-                    <div className="course__video-wrapper">
-                        {item.meta.courseVideoPreview && <video className="course__video" autoPlay preload="auto" loop muted controls>
-                            <source src={item.meta.courseVideoPreview.link} type="application/x-mpegURL" />
-                            Sorry, your browser doesn't support embedded videos.
-                        </video>}
+                {index === 0 && <div className="course__img-wrapper" onMouseEnter={handleHover} onMouseLeave={handleHover} onClick={handleHover}>
+                    <img className="course__img" src={poster} alt="course.img" />
+                    {onHover && <div className="course__video-wrapper">
+                        {item.meta.courseVideoPreview &&
+                            <video className="course__video" preload="auto" controls>
+                                <source src={item.meta.courseVideoPreview.link} type="application/x-mpegURL" />
+                                Sorry, your browser doesn't support embedded videos.
+                            </video>}
                         {!item.meta.courseVideoPreview && <div className="course__video-error">video unavailable</div>}
-                    </div>  
+                    </div> } 
                 </div>}
 
                 {useWidthValue() > 900 && <div className="course__text-wrapper">
@@ -56,15 +64,15 @@ const SingleCourseItem = (props) => {
                     </div>
                 </div>}
                 
-                {index !== 0 && <div className="course__img-wrapper">
-                    <img className="course__img" src={item.previewImageLink + '/cover.webp'} alt="course.img" />
-                    <div className="course__video-wrapper">
-                        {item.meta.courseVideoPreview && <video className="course__video" autoPlay preload="auto" loop muted controls>
+                {index !== 0 && <div className="course__img-wrapper" onMouseEnter={handleHover} onMouseLeave={handleHover} onClick={handleHover}>
+                    <img className="course__img" src={poster} alt="course.img" />
+                    {onHover && <div className="course__video-wrapper">
+                        {item.meta.courseVideoPreview && <video className="course__video" preload="auto" controls>
                             <source src={item.meta.courseVideoPreview.link} type="application/x-mpegURL" />
                             Sorry, your browser doesn't support embedded videos.
                         </video>}
-                        {!item.meta.courseVideoPreview && <div className="course__video-error">Vvideo unavailable</div>}
-                    </div> 
+                        {!item.meta.courseVideoPreview && <div className="course__video-error">Video unavailable</div>}
+                    </div> }
                 </div>}
 
                 {useWidthValue() <= 900 && <div className="course__text-wrapper">

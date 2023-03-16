@@ -104,11 +104,6 @@
         height: auto;
     }
 
-    &__data {
-        display: flex;
-        flex-direction: column;
-    }
-
     &__description {
         position: absolute;
         top: 0;
@@ -157,5 +152,98 @@
         @media screen and (max-width: 570px) {
             font-size: 1.3rem;
         }
+    }
+
+    &__data {
+        padding-inline: 0.5rem;
+        padding-bottom: 1rem;
+        display: flex;
+        gap: 3rem;
+
+        @media screen and (max-width: 900px) {
+            flex-direction: column;
+            gap: unset;
+        }
+    }
+
+    &__info {
+        display: flex;
+        max-width: 30%;
+        width: 100%;
+
+        @media screen and (max-width: 900px) {
+            max-width: unset;
+        }
+    }
+
+    &__info-bar {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    &__info-header {
+        margin: 0.5rem 0;
+        @include font-normal($fw700);
+        font-size: 2rem;
+        color: $pink;
+        text-shadow:
+            1px 0 $violet,
+            1px 1px $violet,
+            0 1px $violet,
+            -1px 1px $violet,
+            -1px 0 $violet,
+            -1px -1px $violet,
+            0 -1px $violet,
+            1px -1px $violet;
+
+        @media screen and (max-width: 570px) {
+            font-size: 1.5rem;
+        }
+
+    }
+
+    &__info-title {
+        @include font-normal($fw700);
+        font-size: 1.5rem;
+        color: $pink;
+
+        @media screen and (max-width: 570px) {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__info-descr {
+        margin-left: 0.5rem;
+        @include font-normal($fw400);
+        font-size: 1.5rem;
+        color: $violet;
+
+        &--single {
+            margin-left: unset;
+        }
+
+        @media screen and (max-width: 570px) {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__lessons {
+        display: flex;
+        flex-direction: column;
+        text-align: end;
+        width: 100%;
+
+        @media screen and (max-width: 900px) {
+            text-align: start;
+        }
+    }
+
+    &__lessons-bar {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 2rem;
+        gap: 2rem;
     }
 }

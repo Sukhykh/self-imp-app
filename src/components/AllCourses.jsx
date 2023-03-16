@@ -6,6 +6,7 @@ import SingleCourseItem from "./SingleCourseItem"
 
 /* dependencies */
 import React from 'react';
+import axios from 'axios'
 import { useWidthValue } from '../hooks/useWidthValue';
 
 const AllCourses = () => {
@@ -24,25 +25,50 @@ const AllCourses = () => {
     const signature = 'Qw3LF39CDp27ZxoGzt5rikJM_OTx0eNaoyFFLxxrXUM';
     const token = [header, body, signature].join('.');
  
-    const getAllCourses = async (url = '') => {
-        const response = await fetch(url, {
-            "headers": {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
-        })
-        return await response.json();
-    };
+    // const getAllCourses = async (url = '') => {
+    //     const response = await fetch(url, {
+    //         "headers": {
+    //             'Authorization': `Bearer ${token}`,
+    //             'Content-Type': 'application/json',
+    //             'Access-Control-Allow-Origin': '*'
+    //         },
+    //     })
+    //     return await response.json();
+    // };
+
+    // React.useEffect(() => {
+    //     getAllCourses(URL).then((data) => {
+    //         console.log(data);
+    //         let sortedData = data.courses.sort((a, b) => new Date(b.launchDate) - new Date(a.launchDate))
+    //         setAllCoursesData([...sortedData])
+    //         console.log(data)
+    //     });
+    // }, [])
 
     React.useEffect(() => {
-        getAllCourses(URL).then((data) => {
+        getAllCourses(URL, token)
+    }, [])
+
+    const getAllCourses = async (urlValue, tokenValue) => {
+        try {
+            const response = await axios({
+                url: urlValue,
+                method: 'GET',
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Authorization': `Bearer ${tokenValue}`,
+                },
+                responseType: 'json'
+            });
+            const data = await response.data;
             console.log(data);
             let sortedData = data.courses.sort((a, b) => new Date(b.launchDate) - new Date(a.launchDate))
             setAllCoursesData([...sortedData])
-            console.log(data)
-        });
-    }, [])
+            
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     /* pagination */
     const coursesOnPage = 10;

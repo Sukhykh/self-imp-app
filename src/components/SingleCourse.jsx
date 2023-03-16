@@ -6,6 +6,7 @@ import Lesson from "./Lesson"
 
 /* dependencies */
 import React from 'react';
+import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { useWidthValue } from '../hooks/useWidthValue';
 
@@ -24,35 +25,66 @@ const SingleCourse = () => {
     const signature = 'Qw3LF39CDp27ZxoGzt5rikJM_OTx0eNaoyFFLxxrXUM';
     const token = [header, body, signature].join('.');
 
-    const getCourseData = async (url = '') => {
-        const response = await fetch(url, {
-            'headers': {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
-        })
-        return await response.json();
-    };
-
-    React.useEffect(() => {
-        const URL = `${host}/${version}/core/preview-courses/${getLocalStorage()}`
-        getCourseData(URL).then((data) => {
-            console.log(data);
-            setCourseData(data);
-            setLessonsData(data.lessons)
-            if (data.meta.skills) {
-                setSkillsData(data.meta.skills)
-            }
-        });
-    }, [])
-
     const getLocalStorage = () => {
         return localStorage.getItem('id')
     }
 
     const date = new Date(courseData.launchDate);
 
+    const URL = `${host}/${version}/core/preview-courses/${getLocalStorage()}`
+
+    // const getCourseData = async (url = '') => {
+    //     const response = await fetch(url, {
+    //         'headers': {
+    //             'Authorization': `Bearer ${token}`,
+    //             'Content-Type': 'application/json',
+    //             'Access-Control-Allow-Origin': '*'
+    //         },
+    //     })
+    //     return await response.json();
+    // };
+
+    // React.useEffect(() => {
+    //     
+    //     getCourseData(URL).then((data) => {
+    //         console.log(data);
+    //         setCourseData(data);
+    //         setLessonsData(data.lessons)
+    //         if (data.meta.skills) {
+    //             setSkillsData(data.meta.skills)
+    //         }
+    //     });
+    // }, [])
+
+    
+    React.useEffect(() => {
+        getCourseData(URL, token)
+    }, [])
+
+    const getCourseData = async (urlValue, tokenValue) => {
+        try {
+            const response = await axios({
+                url: urlValue,
+                method: 'GET',
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Authorization': `Bearer ${tokenValue}`,
+                },
+                responseType: 'json'
+            });
+            const data = await response.data;
+            console.log(data);
+            setCourseData(data);
+            setLessonsData(data.lessons)
+            if (data.meta.skills) {
+                setSkillsData(data.meta.skills)
+            }
+            
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    
     return (
         <section className="single-course">
             <div className="single-course__container">

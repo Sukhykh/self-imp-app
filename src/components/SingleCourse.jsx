@@ -49,14 +49,12 @@ const SingleCourse = () => {
                 responseType: 'json'
             });
             const data = await response.data;
-            console.log(data);
             setCourseData(data);
             let lessonsArr = data.lessons.sort((a, b) => a.order - b.order)
             setLessonsData([...lessonsArr])
             if (data.meta.skills) {
                 setSkillsData(data.meta.skills)
             }
-            
         } catch (error) {
             console.error(error);
         }
@@ -95,7 +93,7 @@ const SingleCourse = () => {
                                     <div className="single-course__info-title">
                                         Available from:
                                         <span className="single-course__info-descr">
-                                            {`${date.toLocaleDateString('en-US', { month: 'long' })}` + " " + `${date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`}` + ', ' + `${date.getFullYear()}`}</span>
+                                            {`${date.toLocaleDateString('en-US', { month: 'long' })} ${date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`}, ${date.getFullYear()}`}</span>
                                     </div>
                                     <div className="single-course__info-title">
                                         Status:
@@ -120,8 +118,6 @@ const SingleCourse = () => {
                                                                                  active={{ accordion, setAccordion }}
                                                                                  poster={poster} />)}
                                 </div>
-                                
-
                             </div>
                         </div>
                     </div>

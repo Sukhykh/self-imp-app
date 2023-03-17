@@ -38,17 +38,21 @@
         color: $violet;
     }
 
-    // previewImageLink+'/'+lesson.order+'.webp'
-
     &__body-wrapper {
         display: flex;
+        justify-content: center;
+        width: 100%;
         background: linear-gradient(180deg, rgba(151, 140, 152, 1) 0%,
                 rgba(151, 140, 152, 0) 100%)
     }
 
-    &__img-wrapper {
+    &__lesson-wrapper {
         display: flex;
+        flex-direction: column;
         margin: 0.5rem;
+    }
+
+    &__img-wrapper {
         position: relative;
         width: 100%;
     }
@@ -67,10 +71,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: transparent;
+        background: linear-gradient(180deg, rgba(151, 140, 152, 1) 0%,
+                rgba(151, 140, 152, 0) 100%)
     }
 
     &__video {
+        position: relative;
         height: 100%;
         width: auto;
     }
@@ -81,5 +87,18 @@
         color: $violet;
         text-transform: uppercase;
         text-align: center;
+    }
+
+    &__controls {
+        text-align: left;
+        margin: 0.5rem;
+        @include font-normal($fw400);
+        color: $violet;
+        font-size: 1rem;
+
+        &--colored {
+            color: $pink;
+            font-weight: $fw700;
+        }
     }
 }

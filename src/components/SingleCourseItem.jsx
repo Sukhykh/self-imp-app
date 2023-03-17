@@ -5,6 +5,7 @@ import '../assets/scss/_SingleCourseItem.scss';
 
 /* dependencies */
 import React from 'react';
+import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 import { useWidthValue } from '../hooks/useWidthValue';
 
@@ -34,10 +35,28 @@ const SingleCourseItem = (props) => {
                     <img className="course__img" src={poster} alt="course.img" />
                     {onHover && <div className="course__video-wrapper">
                         {item.meta.courseVideoPreview &&
-                            <video className="course__video" preload="auto" controls>
-                                <source src={item.meta.courseVideoPreview.link} type="application/x-mpegURL" />
-                                Sorry, your browser doesn't support embedded videos.
-                            </video>}
+                            <ReactPlayer className="course__video"
+                                         url={item.meta.courseVideoPreview.link}
+                                         playing={onHover}
+                                         volume={0}
+                                         muted={true}
+                                         controls={true}
+                                         width='auto'
+                                         height='100%'
+                                         confilefig={{
+                                             file: {
+                                                 attributes: {
+                                                     crossorigin: "anonymous",
+                                                 },
+                                                 forceHLS: true,
+                                                 forceAudio: true,
+                                                hlsOptions: {
+                                                    native: true,
+                                                },
+                                             },
+                                             onError: (err) => console.log(err),
+                                        }}/>
+                            }
                         {!item.meta.courseVideoPreview && <div className="course__video-error">video unavailable</div>}
                     </div> } 
                 </div>}
@@ -67,10 +86,29 @@ const SingleCourseItem = (props) => {
                 {index !== 0 && <div className="course__img-wrapper" onMouseEnter={handleHover} onMouseLeave={handleHover} onClick={handleHover}>
                     <img className="course__img" src={poster} alt="course.img" />
                     {onHover && <div className="course__video-wrapper">
-                        {item.meta.courseVideoPreview && <video className="course__video" preload="auto" controls>
-                            <source src={item.meta.courseVideoPreview.link} type="application/x-mpegURL" />
-                            Sorry, your browser doesn't support embedded videos.
-                        </video>}
+                        {item.meta.courseVideoPreview &&
+                            <ReactPlayer className="course__video"
+                                url={item.meta.courseVideoPreview.link}
+                                playing={onHover}
+                                volume={0}
+                                muted={true}
+                                controls={true}
+                                width='auto'
+                                height='100%'
+                                confilefig={{
+                                    file: {
+                                        attributes: {
+                                            crossorigin: "anonymous",
+                                        },
+                                        forceHLS: true,
+                                        forceAudio: true,
+                                        hlsOptions: {
+                                            native: true,
+                                        },
+                                    },
+                                    onError: (err) => console.log(err),
+                                }} />
+                        }
                         {!item.meta.courseVideoPreview && <div className="course__video-error">Video unavailable</div>}
                     </div> }
                 </div>}

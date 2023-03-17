@@ -26,8 +26,8 @@ const AllCourses = () => {
     const token = [header, body, signature].join('.');
 
     React.useEffect(() => {
-        getAllCourses(URL, token)
-    }, [])
+        getAllCourses(URL, token);
+    }, [URL, token])
 
     const getAllCourses = async (urlValue, tokenValue) => {
         try {
@@ -41,10 +41,8 @@ const AllCourses = () => {
                 responseType: 'json'
             });
             const data = await response.data;
-            console.log(data);
             let sortedData = data.courses.sort((a, b) => new Date(b.launchDate) - new Date(a.launchDate))
             setAllCoursesData([...sortedData])
-            
         } catch (error) {
             console.error(error);
         }
@@ -76,7 +74,7 @@ const AllCourses = () => {
                                     "all-courses__pagination-item all-courses__pagination-item--active" :
                                     "all-courses__pagination-item"}
                                 key={element}
-                                onClick={() => setPage(element)}>{element > 9 ? `${element}` : '0' + `${element}`}</div>)}
+                                onClick={() => setPage(element)}>{element > 9 ? `${element}` : `0${element}`}</div>)}
                         </div>
                     </div>
                     <div className="all-courses__courses">
@@ -92,7 +90,7 @@ const AllCourses = () => {
                                     "all-courses__pagination-item all-courses__pagination-item--active" :
                                     "all-courses__pagination-item"}
                                 key={element}
-                                onClick={() => setPage(element)}>{element > 9 ? `${element}` : '0' + `${element}`}</div>)}
+                                onClick={() => setPage(element)}>{element > 9 ? `${element}` : `0${element}`}</div>)}
                         </div>
                     </div>
                 </div>

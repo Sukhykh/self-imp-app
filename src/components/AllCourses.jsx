@@ -60,6 +60,8 @@ const AllCourses = () => {
         pageNumbers.push(i);
     }
 
+    console.log(allCoursesData)
+
     return (
         <section className="all-courses">
             <div className="all-courses__container">

@@ -72,7 +72,7 @@ const SingleCourseItem = (props) => {
                         </div>
                         <div className="course__descr">
                             <div className="course__descr-text">
-                                <div className="course__string-title">Number of lessons: <span className="course__info">{item.lessonsCount}</span></div>
+                                <div className="course__string-title">Available lessons: <span className="course__info">{item.lessonsCount}</span></div>
                                 <div className="course__string-title">Locked lessons: <span className="course__info">{item.containsLockedLessons? "Yes" : "No"}</span></div>
                                 <div className="course__string-title">Rating: <span className="course__info">{item.rating}/5</span></div>
                             </div>
@@ -124,7 +124,7 @@ const SingleCourseItem = (props) => {
                         </div>
                         <div className="course__descr">
                             <div className="course__descr-text">
-                                <div className="course__string-title">Number of lessons: <span className="course__info">{item.lessonsCount}</span></div>
+                                <div className="course__string-title">Available lessons: <span className="course__info">{item.lessonsCount}</span></div>
                                 <div className="course__string-title">Locked lessons: <span className="course__info">{item.containsLockedLessons ? "Yes" : "No"}</span></div>
                                 <div className="course__string-title">Rating: <span className="course__info">{item.rating}/5</span></div>
                             </div>

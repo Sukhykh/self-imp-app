@@ -91,7 +91,12 @@ const Lesson = (props) => {
         if (item.status === "locked") {
             return
         }
-        props.active.setAccordion(props.index)
+        if (props.index === props.active.accordion) {
+            console.log('here')
+            props.active.setAccordion(null)
+        } else {
+            props.active.setAccordion(props.index)
+        }
     }
     
     return (
@@ -106,7 +111,7 @@ const Lesson = (props) => {
                     {props.index === props.active.accordion &&
                         <div className="lesson__lesson-wrapper">
                             <div className="lesson__img-wrapper" onMouseEnter={handleHoverOn} onMouseLeave={!isPIP && handleHoverOff} onClick={handleHover}>
-                                <img className="lesson__img" src={props.poster} alt="lesson.img" />
+                                <img className="lesson__img" src={item.previewImageLink + '/lesson-' + item.order + '.webp'} alt="lesson.img" />
                                 {(onHover || !isPaused ) && <div className="lesson__video-wrapper">
                                     <ReactPlayer className="lesson__video"
                                         ref={lessonRef}
@@ -114,7 +119,6 @@ const Lesson = (props) => {
                                         playing={false}
                                         playbackRate={speed}
                                         onProgress={localProgress}
-                                        playedSeconds={progressView}
                                         volume={1}
                                         controls={true}
                                         width='auto'
